@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/article"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        tools:text="Another Day " />
+
+    <TextView
+        android:id="@+id/section"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/article"
+        android:layout_marginTop="8dp"
+        android:textSize="16sp"
+        tools:text="Lifestyles" />
+
+    <TextView
+        android:id="@+id/author"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/section"
+        android:layout_marginTop="8dp"
+        android:textSize="16sp"
+        tools:text="Johnson" />
+
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/section"
+        android:layout_marginEnd="55dp"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        tools:text="9/3/2018"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="55dp" />
+
+
+
+
+
+</RelativeLayout>
