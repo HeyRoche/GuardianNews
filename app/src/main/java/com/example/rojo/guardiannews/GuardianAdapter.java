@@ -11,21 +11,20 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-public class GuardianAdapter extends ArrayAdapter<Guardian>{
+public class GuardianAdapter extends ArrayAdapter<Guardian> {
 
     private static final String LOCATION_SEPARATOR = "T";
 
-
-    public GuardianAdapter(Context context, List<Guardian> guardians){
+    public GuardianAdapter(Context context, List<Guardian> guardians) {
         super(context, 0, guardians);
     }
 
     @Override
-    public View getView (int position, View convertView, ViewGroup parent){
+    public View getView(int position, View convertView, ViewGroup parent) {
         View listItemView = convertView;
-        if (listItemView == null){
-            listItemView= LayoutInflater.from(getContext()).inflate(
-                    R.layout.guardian_list_item, parent,false);
+        if (listItemView == null) {
+            listItemView = LayoutInflater.from(getContext()).inflate(
+                    R.layout.guardian_list_item, parent, false);
         }
 
         //Find the story at the given position of hte list of guardian, stories
@@ -37,23 +36,20 @@ public class GuardianAdapter extends ArrayAdapter<Guardian>{
         TextView sectionView = listItemView.findViewById(R.id.section);
         sectionView.setText(currentGuardian.getSection());
 
-        //TextView authorView = listItemView.findViewById(R.id.author);
-        //authorView.setText(currentGuardian.getAuthor());
+        TextView authorView = listItemView.findViewById(R.id.author);
+        authorView.setText(currentGuardian.getAuthor());
 
-
-        String primaryDate =currentGuardian.getDate();
-
+        //Reworked Earthquake code to separate the "T"
+        //Also used https://stackoverflow.com/questions/3481828/how-to-split-a-string-in-java
+        //Getting date and using separator
+        String primaryDate = currentGuardian.getDate();
         String date;
-
-        if(primaryDate.contains(LOCATION_SEPARATOR )){
+        if (primaryDate.contains(LOCATION_SEPARATOR)) {
             String[] parts = primaryDate.split(LOCATION_SEPARATOR);
             date = parts[0];
-
-     }else {
-          date = null;
-
+        } else {
+            date = null;
         }
-
         TextView dateView = listItemView.findViewById(R.id.date);
         dateView.setText(date);
 

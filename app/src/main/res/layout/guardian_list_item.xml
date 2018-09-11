@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="#DBDBD9"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -8,10 +9,11 @@
 
     <TextView
         android:id="@+id/article"
+        android:textColor="#14c1DB"
         android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="24sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         tools:text="Another Day " />
 
@@ -21,6 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/article"
         android:layout_marginTop="8dp"
+        android:textColor="#ffffff"
         android:textSize="16sp"
         tools:text="Lifestyles" />
 
@@ -30,9 +33,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/section"
         android:layout_marginTop="8dp"
+        android:textColor="#ffffff"
         android:textSize="16sp"
         tools:text="Johnson" />
-
 
     <TextView
         android:id="@+id/date"
@@ -42,13 +45,8 @@
         android:layout_alignTop="@+id/section"
         android:layout_marginEnd="55dp"
         android:textSize="16sp"
-        android:textStyle="bold"
+        android:textColor="#ffffff"
         tools:text="9/3/2018"
         android:layout_alignParentRight="true"
         android:layout_marginRight="55dp" />
-
-
-
-
-
 </RelativeLayout>

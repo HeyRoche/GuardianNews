@@ -5,6 +5,8 @@ import android.content.AsyncTaskLoader;
 
 import java.util.List;
 
+//Used Earthquake code from course as a guide
+
 public class GuardianLoader extends AsyncTaskLoader<List<Guardian>> {
 
     private static final String LOG_TAG = GuardianLoader.class.getName();

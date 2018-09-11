@@ -8,12 +8,16 @@ import android.content.Loader;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,17 +25,19 @@ import java.util.List;
 public class GuardianActivity extends AppCompatActivity implements LoaderCallbacks<List<Guardian>> {
     private static final int GUARDIAN_LOADER_ID = 1;
     private static final String LOG_TAG = GuardianAdapter.class.getName();
+    
+    //Used to understand Guardian API https://open-platform.theguardian.com/documentation/
     private static final String GUARDIAN_REQUEST_URL =
-            "https://content.guardianapis.com/search?&show-tags=contributor&" +
-                    "page-size=10&api-key=3f7e3ebb-b747-4c16-91f7-bdaefedc31a7";
+            "https://content.guardianapis.com/search?q=film&show-tags=contributor&page-size=10" +
+                    "&api-key=3f7e3ebb-b747-4c16-91f7-bdaefedc31a7";
     private GuardianAdapter mAdapter;
     private TextView mEmptyStateTextView;
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.guardian_activity);
-
 
         //Find a reference to the {@link ListView} in the layout.
         ListView guardianListView = findViewById(R.id.list);
@@ -85,13 +91,11 @@ public class GuardianActivity extends AppCompatActivity implements LoaderCallbac
             mEmptyStateTextView.setText(R.string.no_internet_connection);
         }
     }
-
     @Override
     public Loader<List<Guardian>> onCreateLoader(int i, Bundle bundle) {
         // Create a new loader for the given URL
         return new GuardianLoader(this, GUARDIAN_REQUEST_URL);
     }
-
     @Override
     public void onLoadFinished(Loader<List<Guardian>> loader, List<Guardian> guardians) {
         // Hide loading indicator because the data has been loaded
@@ -110,7 +114,6 @@ public class GuardianActivity extends AppCompatActivity implements LoaderCallbac
             mAdapter.addAll(guardians);
         }
     }
-
     @Override
     public void onLoaderReset(Loader<List<Guardian>> loader) {
         // Loader reset, so we can clear out our existing data.

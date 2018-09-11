@@ -43,10 +43,11 @@ public class QueryUtils {
             for (int i = 0; i < currentNewsArray.length(); i++) {
                 JSONObject newsArticle = currentNewsArray.getJSONObject(i);
 
+                //Used Project 6 walkthrough to find author and peer comments
                 JSONArray tagArray = newsArticle.getJSONArray("tags");
                 String author = " ";
                 if (tagArray.length() == 0) {
-                    author = null;
+                    author = "R.string.no_auth";
                 }
                 else {
                     for (int t = 0; t < tagArray.length(); t++) {
@@ -62,10 +63,8 @@ public class QueryUtils {
                 Guardian guardian = new Guardian(article, section, date, url, author);
                 guardians.add(guardian);
             }
-
         } catch (JSONException e) {
             Log.e("QueryUtils", "Problem parsing the guardian JSON results", e);
-
         }
        return guardians;
     }
@@ -160,7 +159,7 @@ public class QueryUtils {
             Log.e(LOG_TAG, "Problem making the HTTP request.", e);
         }
 
-        // Extract relevant fields from the JSON response and create a list of {@link Earthquake}s
+        // Extract relevant fields from the JSON response and create a list of {@link Guardian}
         List<Guardian> guardians = extractFeatureFromJson(jsonResponse);
 
         // Return the list of {@link Earthquake}s

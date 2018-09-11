@@ -19,7 +19,6 @@ public class Guardian {
     //Website URL for articles
     private String mURL;
 
-
     public Guardian( String article, String section, String date, String url, String author) {
         mArticle = article;
         mAuthor= author;
@@ -27,11 +26,9 @@ public class Guardian {
         mSection = section;
         mURL=url;
     }
-
     public String getArticle(){return mArticle;}
     public String getSection(){return mSection;}
     public String getAuthor(){return mAuthor;}
     public String getDate(){return mDate;}
     public String getUrl(){return mURL;}
-
 }
