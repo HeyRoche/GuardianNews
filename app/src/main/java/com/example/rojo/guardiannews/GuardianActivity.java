@@ -25,10 +25,12 @@ import java.util.List;
 public class GuardianActivity extends AppCompatActivity implements LoaderCallbacks<List<Guardian>> {
     private static final int GUARDIAN_LOADER_ID = 1;
     private static final String LOG_TAG = GuardianAdapter.class.getName();
-    
+
     //Used to understand Guardian API https://open-platform.theguardian.com/documentation/
+    //https://groups.google.com/forum/#!searchin/guardian-api-talk/sort$20date$20query%7Csort:date/guardian-api-talk/l873UWhh1q4/9zAIIgG-QhsJ
     private static final String GUARDIAN_REQUEST_URL =
-            "https://content.guardianapis.com/search?q=film&show-tags=contributor&page-size=10" +
+            "https://content.guardianapis.com/search?q=film&section=film" +
+                    "&order-by=newest&show-tags=contributor&page-size=10" +
                     "&api-key=3f7e3ebb-b747-4c16-91f7-bdaefedc31a7";
     private GuardianAdapter mAdapter;
     private TextView mEmptyStateTextView;
