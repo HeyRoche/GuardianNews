@@ -5,14 +5,18 @@ import android.app.LoaderManager.LoaderCallbacks;
 import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
+import android.preference.PreferenceManager;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -29,9 +33,7 @@ public class GuardianActivity extends AppCompatActivity implements LoaderCallbac
     //Used to understand Guardian API https://open-platform.theguardian.com/documentation/
     //https://groups.google.com/forum/#!searchin/guardian-api-talk/sort$20date$20query%7Csort:date/guardian-api-talk/l873UWhh1q4/9zAIIgG-QhsJ
     private static final String GUARDIAN_REQUEST_URL =
-            "https://content.guardianapis.com/search?q=film&section=film" +
-                    "&order-by=newest&show-tags=contributor&page-size=10" +
-                    "&api-key=3f7e3ebb-b747-4c16-91f7-bdaefedc31a7";
+            "https://content.guardianapis.com/search?";
     private GuardianAdapter mAdapter;
     private TextView mEmptyStateTextView;
 
@@ -95,8 +97,27 @@ public class GuardianActivity extends AppCompatActivity implements LoaderCallbac
     }
     @Override
     public Loader<List<Guardian>> onCreateLoader(int i, Bundle bundle) {
-        // Create a new loader for the given URL
-        return new GuardianLoader(this, GUARDIAN_REQUEST_URL);
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+
+        String orderBy = sharedPrefs.getString(
+                getString(R.string.settings_order_by_key),
+                getString(R.string.settings_order_by_default));
+        String section = sharedPrefs.getString(
+                getString(R.string.settings_section_by_key),
+                getString(R.string.settings_section_by_default));
+
+
+        Uri baseUri = Uri.parse(GUARDIAN_REQUEST_URL);
+        Uri.Builder uriBuilder = baseUri.buildUpon();
+
+        uriBuilder.appendQueryParameter("show-tags", "contributor");
+        uriBuilder.appendQueryParameter("page-size", "10");
+        uriBuilder.appendQueryParameter("api-key", "3f7e3ebb-b747-4c16-91f7-bdaefedc31a7");
+        uriBuilder.appendQueryParameter("order-by", orderBy);
+        uriBuilder.appendQueryParameter("from-date","2018");
+        uriBuilder.appendQueryParameter("section", section);
+
+        return new GuardianLoader(this, uriBuilder.toString());
     }
     @Override
     public void onLoadFinished(Loader<List<Guardian>> loader, List<Guardian> guardians) {
@@ -120,5 +141,23 @@ public class GuardianActivity extends AppCompatActivity implements LoaderCallbac
     public void onLoaderReset(Loader<List<Guardian>> loader) {
         // Loader reset, so we can clear out our existing data.
         mAdapter.clear();
+    }
+    @Override
+    // This method initialize the contents of the Activity's options menu
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+    @Override
+    // This method is called whenever an item in the options menu is selected.
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_settings) {
+            Intent settingsIntent = new Intent(this, SettingsActivity.class);
+            startActivity(settingsIntent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+
     }
 }

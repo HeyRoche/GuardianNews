@@ -1,8 +1,38 @@
 <resources>
     <string name="app_name">Guardian News</string>
-    <string name="movie_news">Guardian: Movie News</string>
+    <string name="newsfeed">Guardian: Custom Newsfeed</string>
     <string name="no_internet_connection">No internet connection.</string>
     <string name="no_news">No Articles Found</string>
     <string name="no_auth">N/A</string>
+    <string name="settings_menu_item">Settings</string>
+    <string name="settings_title">Guardian Settings</string>
+
+    <string name="settings_order_by_label">Order By</string>
+    <string name="settings_order_by_key" translatable="false">order_by</string>
+    <string name="settings_order_by_default" translatable="false">@string/settings_order_by_recent_value</string>
+
+    <string name="settings_order_by_recent_label">Recent</string>
+    <string name="settings_order_by_recent_value" translatable ="false">newest</string>
+
+    <string name="settings_order_by_relevance_label">Oldest</string>
+    <string name="settings_order_by_relevance_value" translatable ="false">oldest</string>
+
+    <string name="settings_section_by_value">Section</string>
+
+    <string name="settings_section_by_label">Section</string>
+    <string name="settings_section_by_key" translatable="false">section</string>
+    <string name="settings_section_by_default" translatable="false">@string/settings_section_all_value</string>
+
+    <string name="settings_section_all_label">US News</string>
+    <string name="settings_section_all_value" translatable ="false">us-news</string>
+
+    <string name="settings_section_film_label">Film</string>
+    <string name="settings_section_film_value" translatable ="false">film</string>
+
+    <string name="settings_section_fashion_label">Fashion</string>
+    <string name="settings_section_fashion_value" translatable ="false">fashion</string>
+
+    <string name="settings_section_food_label">Food</string>
+    <string name="settings_section_food_value" translatable ="false">food</string>
 
 </resources>

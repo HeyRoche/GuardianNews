@@ -47,7 +47,7 @@ public class QueryUtils {
                 JSONArray tagArray = newsArticle.getJSONArray("tags");
                 String author = " ";
                 if (tagArray.length() == 0) {
-                    author = "R.string.no_auth";
+                    author ="N/A";
                 }
                 else {
                     for (int t = 0; t < tagArray.length(); t++) {
